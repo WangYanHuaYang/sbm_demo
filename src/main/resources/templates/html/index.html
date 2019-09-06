@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <script src="/static/js/main.js"></script>
+</head>
+<body>
+<div>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <div>
+        <input id="name" type="text" placeholder="请输入表名">
+        <button id="cratetable">Create Tabel</button>
+    </div>
+    <form th:action="@{/logout}" method="get">
+        <p>
+            <input type="submit" value="Sign Out"/>
+        </p>
+    </form>
+</div>
+</body>
+<script src="/static/js/index.js"></script>
+</html>

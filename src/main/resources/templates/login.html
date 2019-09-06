@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    用户名或密码错误！
+</div>
+<div th:if="${param.logout}">
+    你必须登陆
+</div>
+<form th:action="@{/system/login}" method="post">
+    <div><label> 用户名 : <input type="text" name="username"/> </label></div>
+    <div><label> 密  码: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="登  录"/></div>
+</form>
+</body>
+</html>
