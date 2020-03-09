@@ -1,10 +1,5 @@
 package com.wyhy.sbm_demo.Util;
 
-
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -17,8 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -728,34 +723,6 @@ public class Utils {
         }
     }
 
-    // 图片压缩
-    public static void picZip(File file, String outputDir, int width, int height) throws IOException {
-        FileOutputStream out = null;
-        try {
-            Image img = ImageIO.read(file);
-            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            tag.getGraphics().drawImage(img.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
-            String newFileName = outputDir + File.separator + file.getName();
-            File _file = new File(newFileName);
-            int i = 1;
-            String[] fileNameArray = newFileName.split("\\.");
-            while (_file.exists()) {
-                newFileName = outputDir + _file.separator + fileNameArray[0] + "(" + i + ")" + "." + fileNameArray[1];
-                _file = new File(newFileName);
-                i++;
-            }
-            out = new FileOutputStream(newFileName);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-            encoder.encode(tag);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (out != null) {
-                out.close();
-            }
-        }
-    }
-
     /**
      *
      * @param s
@@ -894,7 +861,7 @@ public class Utils {
      * 正则表达式：验证手机号
      */
     public static boolean Phone(String num) {
-        String reg = "^1\\d{10}$";
+        String reg = "^[1]([3-9])[0-9]{9}$";
         if (!num.matches(reg)) {
             return false;
         }
@@ -940,7 +907,7 @@ public class Utils {
      * @return
      */
     public static boolean checkPhone(String phone) {
-        Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Pattern pattern = Pattern.compile("/^[1]([3-9])[0-9]{9}$/");
         Matcher matcher = pattern.matcher(phone);
         if (matcher.matches()) {
             return true;
@@ -1008,7 +975,7 @@ public class Utils {
 
         return newString;
     }
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
         /*Utils u = new Utils();*/
         //Set<Integer> set = new HashSet<Integer>();
 	/*Random random = new Random();
@@ -1023,7 +990,7 @@ String aaa="22038119991103522x";
 //	Utils u = new Utils();
 //	u.shijian();
 
-    }
+//    }
     public static int LoginTime(){
         SimpleDateFormat sdf=new SimpleDateFormat("HH");
         int a= Integer.parseInt(sdf.format(new Date()));
@@ -1103,6 +1070,22 @@ String aaa="22038119991103522x";
     public static String examine(Integer max){
         DecimalFormat decimalFormat = new DecimalFormat("0000");
         return decimalFormat.format(max);
+    }
+
+
+    /**
+     * @Description: list去重
+     * @Param: [list]
+     * @return: java.util.List
+     * @Author: WYHY
+     * @Date: 2020/1/14
+     */
+    public static List<String> twoClear(List<String> list){
+        List<String> tmp = new ArrayList<String>();
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<String>();
+        linkedHashSet.addAll(list);
+        tmp.addAll(linkedHashSet);
+        return tmp;
     }
 
 }

@@ -22,8 +22,20 @@ public class Msg {
 
 	public static Msg SUCCESS(){
 		Msg result=new Msg();
-		result.setCode(200);
+		result.setCode(0);
 		result.setMessage("请求成功");
+		return result;
+	}
+	public static Msg CUSTOM_MSG(String msg){
+		Msg result=new Msg();
+		result.setCode(100);
+		result.setMessage(msg);
+		return result;
+	}
+	public static Msg CUSTOM_MSG(int code,String msg){
+		Msg result=new Msg();
+		result.setCode(code);
+		result.setMessage(msg);
 		return result;
 	}
 
