@@ -137,26 +137,6 @@ public class ${table.controllerName} {
     }
 
     /**
-     * @Description: 根据id查询 ${entity}
-     * @Param: [id]
-     * @Author: ${author}
-     * @Date: 2018/9/30
-     */
-    @ApiOperation("根据id查询 ${entity}")
-    @RequestMapping(value = "/select${entity}ById",method = RequestMethod.POST)
-    <#if restControllerStyle>
-    <#else>@ResponseBody
-    </#if>
-    private Msg select${entity}ById(@RequestParam(value = "id",defaultValue = "no")<#list table.fields as field><#if field.keyFlag><#-- 主键 -->${field.propertyType} ${field.propertyName}</#if></#list>){
-    ${entity} state=baseService.getById(id);
-        if (state!=null){
-            return Msg.SUCCESS().add("result",state);
-        }else{
-            return Msg.FAIL();
-        }
-    }
-
-    /**
      * @Description: 导入 ${entity}
      * @Param: [id]
      * @Author: ${author}
